@@ -14,6 +14,10 @@ export function Footer() {
           <p className="mt-4 text-sm text-muted-foreground max-w-xs">
             Everything you need, all in one place. A premium digital mall built for what's next.
           </p>
+          <div className="mt-4 space-y-1 text-sm text-muted-foreground">
+            <a href="tel:+233203662465" className="block hover:text-foreground transition">📞 0203 662 465</a>
+            <a href="tel:+233553306538" className="block hover:text-foreground transition">📞 0553 306 538</a>
+          </div>
           <div className="mt-5 flex gap-2">
             {[Instagram, Twitter, Facebook, Youtube].map((Icon, i) => (
               <a key={i} href="#" className="grid h-10 w-10 place-items-center rounded-full glass hover:scale-105 transition" aria-label="social">
@@ -23,7 +27,7 @@ export function Footer() {
           </div>
         </div>
         <FooterCol title="Shop" links={[["All Products","/shop"],["Categories","/categories"],["New Arrivals","/shop"],["Pre-order","/shop"]]} />
-        <FooterCol title="Support" links={[["Contact","/contact"],["Shipping","/about"],["Returns","/about"],["FAQ","/about"]]} />
+        <FooterCol title="Support" links={[["Contact","/contact"],["Track Order","/track"],["Shipping","/about"],["Returns","/about"]]} />
         <FooterCol title="Company" links={[["About","/about"],["Careers","/about"],["Privacy","/about"],["Terms","/about"]]} />
       </div>
       <div className="border-t border-glass-border py-6 text-center text-xs text-muted-foreground">
