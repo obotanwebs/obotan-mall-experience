@@ -1,24 +1,21 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-
 import appCss from "../styles.css?url";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+    <div className="relative flex min-h-screen items-center justify-center px-4 overflow-hidden">
+      <div className="absolute inset-0 -z-10 aurora-bg opacity-50" />
+      <div className="glass-strong rounded-3xl p-12 text-center max-w-md">
+        <h1 className="font-display text-7xl font-bold gradient-text">404</h1>
+        <h2 className="mt-3 text-xl font-semibold">Lost in the mall</h2>
+        <p className="mt-2 text-sm text-muted-foreground">This page wandered off. Let's get you home.</p>
+        <Link to="/" className="mt-6 inline-flex items-center justify-center rounded-full bg-foreground text-background px-6 py-2.5 text-sm font-semibold hover:opacity-90 transition">
+          Back home
+        </Link>
       </div>
     </div>
   );
@@ -29,20 +26,17 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "OBOTANMALL — Everything You Need, All in One Place" },
+      { name: "description", content: "Premium online mall for gadgets, fashion, electronics, accessories and more. Pre-order, in-stock, and waiting items with worldwide shipping." },
+      { property: "og:title", content: "OBOTANMALL" },
+      { property: "og:description", content: "Your one-stop premium online shopping destination." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+    links: [{ rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -52,10 +46,8 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
+    <html lang="en" className="dark">
+      <head><HeadContent /></head>
       <body>
         {children}
         <Scripts />
@@ -65,5 +57,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <ThemeProvider>
+      <div className="relative min-h-screen flex flex-col">
+        <div className="pointer-events-none fixed inset-0 -z-10 aurora-bg opacity-40" />
+        <Navbar />
+        <main className="flex-1"><Outlet /></main>
+        <Footer />
+        <Toaster position="top-center" />
+      </div>
+    </ThemeProvider>
+  );
 }
