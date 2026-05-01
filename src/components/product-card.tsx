@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import type { Product } from "@/lib/products";
 import { STATUS_META } from "@/lib/products";
 import { useWishlist } from "@/lib/store";
+import { ghs } from "@/lib/currency";
 
 export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
   const wished = useWishlist((s) => s.ids.includes(product.id));
@@ -52,7 +53,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             <p className="text-xs uppercase tracking-wider text-muted-foreground">{product.category}</p>
             <h3 className="mt-0.5 font-medium truncate">{product.name}</h3>
           </div>
-          <p className="font-display text-lg font-semibold whitespace-nowrap">${product.price}</p>
+          <p className="font-display text-lg font-semibold whitespace-nowrap">{ghs(product.price)}</p>
         </div>
       </Link>
     </motion.div>

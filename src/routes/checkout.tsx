@@ -4,6 +4,7 @@ import { CheckCircle2, CreditCard, Wallet } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/lib/store";
 import { SHIPPING_OPTIONS } from "@/lib/products";
+import { ghs } from "@/lib/currency";
 import { SectionHeader } from "./index";
 
 export const Route = createFileRoute("/checkout")({
@@ -108,14 +109,14 @@ function Checkout() {
                     <p className="text-sm font-medium truncate">{it.product.name}</p>
                     <p className="text-xs text-muted-foreground">Qty {it.qty}{ship ? ` · ${ship.icon} ${ship.label}` : ""}</p>
                   </div>
-                  <p className="text-sm font-semibold">${(it.product.price + (ship?.cost ?? 0)) * it.qty}</p>
+                  <p className="text-sm font-semibold">{ghs((it.product.price + (ship?.cost ?? 0)) * it.qty)}</p>
                 </div>
               );
             })}
           </div>
           <div className="mt-5 pt-5 border-t border-glass-border flex items-center justify-between">
             <span className="font-semibold">Total</span>
-            <span className="font-display text-2xl font-bold gradient-text">${subtotal.toFixed(2)}</span>
+            <span className="font-display text-2xl font-bold gradient-text">{ghs(subtotal)}</span>
           </div>
           <button type="submit" className="mt-6 w-full rounded-full bg-foreground text-background px-7 py-3.5 text-sm font-semibold shadow-glow hover:scale-[1.02] transition">
             Place order

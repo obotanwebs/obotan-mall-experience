@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { getProduct, PRODUCTS, SHIPPING_OPTIONS, STATUS_META } from "@/lib/products";
 import { useCart, useWishlist } from "@/lib/store";
 import { ProductCard } from "@/components/product-card";
+import { ghs } from "@/lib/currency";
 
 export const Route = createFileRoute("/product/$slug")({
   component: ProductPage,
@@ -73,7 +74,7 @@ function ProductPage() {
               <>
                 <div className="flex items-baseline justify-between gap-4">
                   <span className="text-sm text-muted-foreground">Product price</span>
-                  <span className="font-display text-2xl font-bold">${product.price}</span>
+                  <span className="font-display text-2xl font-bold">{ghs(product.price)}</span>
                 </div>
                 <p className="mt-5 text-sm font-semibold mb-3">Choose shipping method</p>
                 <div className="grid sm:grid-cols-2 gap-3">
@@ -88,7 +89,7 @@ function ProductPage() {
                         <div className="text-xl">{opt.icon}</div>
                         <div className="mt-2 font-semibold text-sm">{opt.label}</div>
                         <div className="text-xs text-muted-foreground">{opt.days}</div>
-                        <div className="mt-2 font-display font-bold">${opt.cost}</div>
+                        <div className="mt-2 font-display font-bold">{ghs(opt.cost)}</div>
                       </button>
                     );
                   })}
@@ -100,14 +101,14 @@ function ProductPage() {
                   </div>
                   <div className="text-right">
                     <div className="text-xs text-muted-foreground">Total</div>
-                    <div className="font-display text-3xl font-bold gradient-text">${total}</div>
+                    <div className="font-display text-3xl font-bold gradient-text">{ghs(total)}</div>
                   </div>
                 </div>
               </>
             ) : (
               <div className="flex items-baseline justify-between gap-4">
                 <span className="text-sm text-muted-foreground">Price</span>
-                <span className="font-display text-3xl font-bold gradient-text">${product.price}</span>
+                <span className="font-display text-3xl font-bold gradient-text">{ghs(product.price)}</span>
               </div>
             )}
           </div>

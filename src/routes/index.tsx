@@ -4,7 +4,8 @@ import { ArrowRight, Sparkles, Truck, Shield, RefreshCcw, Mail } from "lucide-re
 import { useState } from "react";
 import { toast } from "sonner";
 import { ProductCard } from "@/components/product-card";
-import { PRODUCTS, CATEGORIES } from "@/lib/products";
+import { PRODUCTS, CATEGORIES, getProduct } from "@/lib/products";
+import { ghs } from "@/lib/currency";
 import heroImg from "@/assets/hero.jpg";
 import catGadgets from "@/assets/cat-gadgets.jpg";
 import catFashion from "@/assets/cat-fashion.jpg";
@@ -98,7 +99,7 @@ function Hero() {
                 <div className="grid h-12 w-12 place-items-center rounded-xl bg-[var(--gradient-primary)] text-primary-foreground text-xl">✨</div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs text-muted-foreground">Trending today</p>
-                  <p className="font-semibold text-sm truncate">Aurora Pro Headphones — $299</p>
+                  <p className="font-semibold text-sm truncate">Aurora Pro Headphones — {ghs(getProduct("aurora-pro-headphones")?.price ?? 299)}</p>
                 </div>
                 <Link to="/product/$slug" params={{ slug: "aurora-pro-headphones" }} className="text-xs font-semibold rounded-full bg-foreground text-background px-3 py-1.5">View</Link>
               </div>
