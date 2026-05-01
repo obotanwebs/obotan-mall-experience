@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
+import { FlashSalePopup } from "@/components/flash-sale-popup";
 
 function NotFoundComponent() {
   return (
@@ -69,6 +70,7 @@ function RootComponent() {
         <main className="flex-1"><Outlet /></main>
         <Footer />
         <Toaster position="top-center" />
+        <FlashSalePopup />
       </div>
     </ThemeProvider>
   );
