@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MessageCircle, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { useState } from "react";
 import { toast } from "sonner";
 import { SectionHeader } from "./index";
@@ -32,7 +33,7 @@ function ContactPage() {
       <div className="grid lg:grid-cols-[1fr_1fr] gap-8">
         <div className="space-y-4">
           <div className="glass-strong rounded-3xl p-6 flex items-start gap-4">
-            <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#25D366] text-white"><MessageCircle className="h-5 w-5" /></div>
+            <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#25D366] text-white"><WhatsAppIcon className="h-6 w-6" /></div>
             <div>
               <h3 className="font-display font-bold">WhatsApp</h3>
               <a href="https://wa.me/233203662465" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition block">+233 20 366 2465</a>
