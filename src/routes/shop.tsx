@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
 import { PRODUCTS, CATEGORIES, type ProductStatus } from "@/lib/products";
+import { ghs } from "@/lib/currency";
 import { SectionHeader } from "./index";
 
 export const Route = createFileRoute("/shop")({
@@ -57,7 +58,7 @@ function Shop() {
         <div className="flex items-center gap-3 px-2">
           <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
           <input type="range" min={50} max={2000} step={50} value={maxPrice} onChange={(e) => setMaxPrice(+e.target.value)} className="accent-[var(--primary)]" />
-          <span className="text-sm font-medium whitespace-nowrap">≤ ${maxPrice}</span>
+          <span className="text-sm font-medium whitespace-nowrap">≤ {ghs(maxPrice)}</span>
         </div>
       </div>
 

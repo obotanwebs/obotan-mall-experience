@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/store";
 import { SHIPPING_OPTIONS } from "@/lib/products";
+import { ghs } from "@/lib/currency";
 import { SectionHeader } from "./index";
 
 export const Route = createFileRoute("/cart")({
@@ -52,7 +53,7 @@ function CartPage() {
                       onChange={(e) => setShipping(it.product.id, e.target.value as "air" | "sea")}
                       className="mt-2 text-xs rounded-full bg-background/40 border border-glass-border px-3 py-1"
                     >
-                      {SHIPPING_OPTIONS.map((o) => <option key={o.id} value={o.id}>{o.icon} {o.label} (+${o.cost}, {o.days})</option>)}
+                      {SHIPPING_OPTIONS.map((o) => <option key={o.id} value={o.id}>{o.icon} {o.label} (+{ghs(o.cost)}, {o.days})</option>)}
                     </select>
                   )}
                 </div>
@@ -62,7 +63,7 @@ function CartPage() {
                   <button onClick={() => setQty(it.product.id, it.qty + 1)} className="h-8 w-8 grid place-items-center rounded-full glass hover:bg-foreground/10"><Plus className="h-3 w-3" /></button>
                 </div>
                 <div className="text-right min-w-[80px]">
-                  <div className="font-display font-bold">${line}</div>
+                  <div className="font-display font-bold">{ghs(line)}</div>
                   <button onClick={() => remove(it.product.id)} className="mt-1 text-xs text-muted-foreground hover:text-destructive inline-flex items-center gap-1"><Trash2 className="h-3 w-3" /> Remove</button>
                 </div>
               </div>
@@ -73,13 +74,13 @@ function CartPage() {
         <aside className="glass-strong rounded-3xl p-6 h-fit lg:sticky lg:top-28">
           <h3 className="font-display text-xl font-bold mb-5">Order summary</h3>
           <div className="space-y-2.5 text-sm">
-            <Row label="Subtotal" value={`$${subtotal.toFixed(2)}`} />
+            <Row label="Subtotal" value={ghs(subtotal)} />
             <Row label="Estimated tax" value="—" muted />
             <Row label="Shipping" value="Calculated at checkout" muted />
           </div>
           <div className="mt-5 pt-5 border-t border-glass-border flex items-center justify-between">
             <span className="font-semibold">Total</span>
-            <span className="font-display text-2xl font-bold gradient-text">${subtotal.toFixed(2)}</span>
+            <span className="font-display text-2xl font-bold gradient-text">{ghs(subtotal)}</span>
           </div>
           <Link to="/checkout" className="mt-6 block text-center rounded-full bg-foreground text-background px-7 py-3.5 text-sm font-semibold shadow-glow hover:scale-[1.02] transition">
             Checkout
