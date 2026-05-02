@@ -1,11 +1,12 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CheckCircle2, CreditCard, Wallet } from "lucide-react";
+import { CheckCircle2, CreditCard, Smartphone, Copy } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/lib/store";
 import { SHIPPING_OPTIONS } from "@/lib/products";
 import { ghs } from "@/lib/currency";
 import { SectionHeader } from "./index";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({ meta: [{ title: "Checkout — OBOTANMALL" }] }),
@@ -74,7 +75,7 @@ function Checkout() {
             <div className="grid sm:grid-cols-2 gap-3">
               {[
                 { id: "card", label: "Credit / Debit Card", icon: CreditCard, note: "Visa, Mastercard, Amex" },
-                { id: "manual", label: "Manual transfer", icon: Wallet, note: "Bank or mobile money" },
+                { id: "manual", label: "Mobile Money (MTN & Telecel)", icon: Smartphone, note: "Pay via MoMo — fast & easy" },
               ].map((opt) => {
                 const active = pay === opt.id;
                 return (
@@ -94,6 +95,7 @@ function Checkout() {
                 <Field label="CVC" name="cvc" placeholder="•••" />
               </div>
             )}
+            {pay === "manual" && <MomoInstructions total={subtotal} />}
           </Card>
         </div>
 
@@ -142,5 +144,70 @@ function Field({ label, className = "", ...props }: React.InputHTMLAttributes<HT
       <span className="text-xs font-medium text-muted-foreground">{label}</span>
       <input {...props} className="mt-1.5 w-full rounded-xl bg-background/40 border border-glass-border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40" />
     </label>
+  );
+}
+
+function MomoInstructions({ total }: { total: number }) {
+  const copy = (value: string, label: string) => {
+    navigator.clipboard.writeText(value);
+    toast.success(`${label} copied`);
+  };
+  const waMsg = `Hello OBOTANMALL, I have made a Mobile Money payment of ${ghs(total)}. Here is my transaction reference:`;
+  const waHref = `https://wa.me/233203662465?text=${encodeURIComponent(waMsg)}`;
+
+  return (
+    <div className="mt-5 space-y-4">
+      <div className="rounded-2xl border border-glass-border bg-background/40 p-5">
+        <p className="text-sm text-muted-foreground">
+          You can complete your payment using <span className="font-semibold text-foreground">Mobile Money</span>. Please send the exact amount to one of the numbers below and use your <span className="font-semibold text-foreground">name or order ID</span> as reference.
+        </p>
+
+        <div className="mt-4 grid sm:grid-cols-2 gap-3">
+          {/* MTN */}
+          <div className="rounded-2xl p-4 border-2 border-yellow-400/50 bg-yellow-400/5">
+            <div className="flex items-center gap-3">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-yellow-400 text-black font-display font-extrabold text-xs">MTN</span>
+              <div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">MTN Mobile Money</div>
+                <div className="font-display text-lg font-bold">0553 306 538</div>
+              </div>
+            </div>
+            <button type="button" onClick={() => copy("0553306538", "MTN number")}
+              className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-foreground/80 hover:text-foreground">
+              <Copy className="h-3.5 w-3.5" /> Copy number
+            </button>
+          </div>
+
+          {/* Telecel */}
+          <div className="rounded-2xl p-4 border-2 border-red-500/40 bg-red-500/5">
+            <div className="flex items-center gap-3">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-red-600 text-white font-display font-extrabold text-[10px]">TEL</span>
+              <div>
+                <div className="text-xs uppercase tracking-wider text-muted-foreground">Telecel Cash</div>
+                <div className="font-display text-lg font-bold">0203 662 465</div>
+              </div>
+            </div>
+            <button type="button" onClick={() => copy("0203662465", "Telecel number")}
+              className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-foreground/80 hover:text-foreground">
+              <Copy className="h-3.5 w-3.5" /> Copy number
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-4 flex items-center justify-between rounded-xl bg-foreground/5 px-4 py-3">
+          <span className="text-xs text-muted-foreground">Amount to send</span>
+          <span className="font-display text-lg font-bold gradient-text">{ghs(total)}</span>
+        </div>
+
+        <p className="mt-4 text-xs text-muted-foreground">
+          After payment, please send a screenshot or transaction ID via WhatsApp or wait for automatic confirmation.
+        </p>
+
+        <a href={waHref} target="_blank" rel="noopener noreferrer"
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] text-white px-7 py-3 text-sm font-semibold hover:scale-[1.02] transition">
+          <WhatsAppIcon className="h-5 w-5" /> Confirm Payment on WhatsApp
+        </a>
+      </div>
+    </div>
   );
 }
