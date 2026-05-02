@@ -1,11 +1,12 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CheckCircle2, CreditCard, Wallet } from "lucide-react";
+import { CheckCircle2, CreditCard, Smartphone, Copy } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/lib/store";
 import { SHIPPING_OPTIONS } from "@/lib/products";
 import { ghs } from "@/lib/currency";
 import { SectionHeader } from "./index";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({ meta: [{ title: "Checkout — OBOTANMALL" }] }),
