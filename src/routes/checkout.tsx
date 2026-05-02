@@ -75,7 +75,7 @@ function Checkout() {
             <div className="grid sm:grid-cols-2 gap-3">
               {[
                 { id: "card", label: "Credit / Debit Card", icon: CreditCard, note: "Visa, Mastercard, Amex" },
-                { id: "manual", label: "Manual transfer", icon: Wallet, note: "Bank or mobile money" },
+                { id: "manual", label: "Mobile Money (MTN & Telecel)", icon: Smartphone, note: "Pay via MoMo — fast & easy" },
               ].map((opt) => {
                 const active = pay === opt.id;
                 return (
@@ -95,6 +95,7 @@ function Checkout() {
                 <Field label="CVC" name="cvc" placeholder="•••" />
               </div>
             )}
+            {pay === "manual" && <MomoInstructions total={subtotal} />}
           </Card>
         </div>
 
