@@ -9,6 +9,18 @@ import earbuds from "@/assets/p-earbuds.jpg";
 import lamp from "@/assets/p-lamp.jpg";
 import wallet from "@/assets/p-wallet.jpg";
 import jacket from "@/assets/p-jacket.jpg";
+import mouse from "@/assets/p-mouse.jpg";
+import keyboard from "@/assets/p-keyboard.jpg";
+import speaker from "@/assets/p-speaker.jpg";
+import tablet from "@/assets/p-tablet.jpg";
+import drone from "@/assets/p-drone.jpg";
+import jeans from "@/assets/p-jeans.jpg";
+import tshirt from "@/assets/p-tshirt.jpg";
+import perfume from "@/assets/p-perfume.jpg";
+import skincare from "@/assets/p-skincare.jpg";
+import coffeemaker from "@/assets/p-coffeemaker.jpg";
+import pillow from "@/assets/p-pillow.jpg";
+import beltwatch from "@/assets/p-belt.jpg";
 
 export type ProductStatus = "in-stock" | "waiting" | "pre-order";
 
@@ -112,6 +124,78 @@ export const PRODUCTS: Product[] = [
     category: "gadgets", price: 249, image: watch, images: [watch],
     description: "The classic Halo experience in a smaller, lighter case.",
     status: "in-stock", rating: 4.5, reviews: 731,
+  },
+  {
+    id: "13", slug: "vortex-rgb-gaming-mouse", name: "Vortex RGB Gaming Mouse",
+    category: "gadgets", price: 89, image: mouse, images: [mouse],
+    description: "Ultra-light wireless gaming mouse with 26K DPI sensor and customizable RGB.",
+    status: "in-stock", rating: 4.7, reviews: 612,
+  },
+  {
+    id: "14", slug: "keystroke-mech-keyboard", name: "Keystroke Mech Keyboard",
+    category: "gadgets", price: 179, image: keyboard, images: [keyboard],
+    description: "65% hot-swappable mechanical keyboard with per-key RGB and wireless mode.",
+    status: "in-stock", rating: 4.8, reviews: 488,
+  },
+  {
+    id: "15", slug: "pulse-portable-speaker", name: "Pulse Portable Speaker",
+    category: "gadgets", price: 139, image: speaker, images: [speaker],
+    description: "360° room-filling sound with 24-hour battery and IPX7 waterproof body.",
+    status: "in-stock", rating: 4.6, reviews: 854,
+  },
+  {
+    id: "16", slug: "slate-pro-tablet", name: "Slate Pro Tablet",
+    category: "electronics", price: 699, image: tablet, images: [tablet],
+    description: "11\" Liquid display tablet with stylus support and all-day battery life.",
+    status: "pre-order", rating: 4.7, reviews: 376,
+  },
+  {
+    id: "17", slug: "skyline-camera-drone", name: "Skyline Camera Drone",
+    category: "electronics", price: 1299, image: drone, images: [drone],
+    description: "4K HDR aerial drone with 3-axis gimbal, obstacle sensing and 35-min flight.",
+    status: "waiting", rating: 4.8, reviews: 263,
+  },
+  {
+    id: "18", slug: "indigo-slim-jeans", name: "Indigo Slim Jeans",
+    category: "fashion", price: 119, image: jeans, images: [jeans],
+    description: "Premium stretch denim with a clean indigo wash and tailored slim fit.",
+    status: "in-stock", rating: 4.5, reviews: 392,
+  },
+  {
+    id: "19", slug: "essential-cotton-tee", name: "Essential Cotton Tee",
+    category: "fashion", price: 39, image: tshirt, images: [tshirt],
+    description: "Heavyweight pima cotton t-shirt with a relaxed crew-neck cut.",
+    status: "in-stock", rating: 4.6, reviews: 1042,
+  },
+  {
+    id: "20", slug: "noir-eau-de-parfum", name: "Noir Eau de Parfum",
+    category: "beauty", price: 149, image: perfume, images: [perfume],
+    description: "Warm amber and oud fragrance with notes of bergamot and vanilla, 100ml.",
+    status: "in-stock", rating: 4.8, reviews: 568,
+  },
+  {
+    id: "21", slug: "glow-hydrating-cream", name: "Glow Hydrating Cream",
+    category: "beauty", price: 69, image: skincare, images: [skincare],
+    description: "72-hour moisture lock with hyaluronic acid and niacinamide for radiant skin.",
+    status: "in-stock", rating: 4.7, reviews: 1296,
+  },
+  {
+    id: "22", slug: "brewmaster-coffee-machine", name: "Brewmaster Coffee Machine",
+    category: "home", price: 349, image: coffeemaker, images: [coffeemaker],
+    description: "Programmable drip coffee maker with thermal carafe and built-in grinder.",
+    status: "in-stock", rating: 4.6, reviews: 487,
+  },
+  {
+    id: "23", slug: "marigold-throw-pillow-set", name: "Marigold Throw Pillow Set",
+    category: "home", price: 59, image: pillow, images: [pillow],
+    description: "Set of 3 hand-embroidered cotton throw pillows in warm sun-toned patterns.",
+    status: "in-stock", rating: 4.5, reviews: 213,
+  },
+  {
+    id: "24", slug: "ravena-chrono-watch", name: "Ravena Chrono Watch",
+    category: "accessories", price: 269, image: beltwatch, images: [beltwatch],
+    description: "Stainless chronograph with sapphire crystal and full-grain leather strap.",
+    status: "pre-order", rating: 4.7, reviews: 184,
   },
 ];
 
