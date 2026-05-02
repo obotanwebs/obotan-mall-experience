@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Truck, Shield, RefreshCcw, Mail } from "lucide-react";
-import { useState } from "react";
-import { toast } from "sonner";
+import { ArrowRight, Sparkles, Truck, Shield, RefreshCcw } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { PRODUCTS, CATEGORIES, getProduct } from "@/lib/products";
 import { ghs } from "@/lib/currency";
 import heroImg from "@/assets/hero.jpg";
@@ -181,27 +180,31 @@ function WhyUs() {
 }
 
 function Newsletter() {
-  const [email, setEmail] = useState("");
   return (
     <section className="mx-auto max-w-7xl px-4 md:px-8 py-16">
       <div className="relative overflow-hidden rounded-[2rem] glass-strong p-8 md:p-14 text-center">
         <div className="absolute inset-0 -z-10 aurora-bg opacity-50" />
-        <Mail className="h-8 w-8 mx-auto mb-4 text-primary" />
-        <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight">Stay in the loop</h2>
-        <p className="mt-3 text-muted-foreground max-w-lg mx-auto">Be first to hear about restocks, drops and members-only pricing.</p>
-        <form
-          onSubmit={(e) => { e.preventDefault(); if (!email.includes("@")) return toast.error("Enter a valid email"); toast.success("You're in! Check your inbox."); setEmail(""); }}
-          className="mt-7 flex flex-col sm:flex-row gap-2 max-w-md mx-auto"
-        >
-          <input
-            value={email} onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com" type="email"
-            className="flex-1 glass rounded-full px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-          />
-          <button type="submit" className="rounded-full bg-foreground text-background px-7 py-3.5 text-sm font-semibold hover:scale-[1.03] transition">
-            Subscribe
-          </button>
-        </form>
+        <div className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-2xl bg-[#25D366] text-white shadow-glow">
+          <WhatsAppIcon className="h-8 w-8" />
+        </div>
+        <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight max-w-3xl mx-auto">
+          Join Our WhatsApp Community for Exclusive Deals & Updates
+        </h2>
+        <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
+          Stay updated with our latest offers, discounts, and announcements. Join our WhatsApp community and never miss out.
+        </p>
+        <div className="mt-8 flex justify-center">
+          <a
+            href="https://chat.whatsapp.com/FGKYqP9WrKvB88Kh9rFgfm"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5a] text-white px-8 py-4 text-sm md:text-base font-semibold shadow-glow hover:scale-[1.04] transition-all"
+          >
+            <WhatsAppIcon className="h-5 w-5" />
+            Join Now on WhatsApp
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
+          </a>
+        </div>
       </div>
     </section>
   );
