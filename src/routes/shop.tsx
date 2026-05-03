@@ -26,8 +26,9 @@ const STATUS_FILTERS: { id: "all" | ProductStatus; label: string }[] = [
 ];
 
 function Shop() {
+  const { category } = Route.useSearch();
   const [q, setQ] = useState("");
-  const [cat, setCat] = useState("all");
+  const [cat, setCat] = useState(category ?? "all");
   const [status, setStatus] = useState<"all" | ProductStatus>("all");
   const [maxPrice, setMaxPrice] = useState(2000);
 
