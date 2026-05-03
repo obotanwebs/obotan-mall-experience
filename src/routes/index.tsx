@@ -37,6 +37,7 @@ function Home() {
       <Featured />
       <WhyUs />
       <Newsletter />
+      <BrandsMarquee />
     </>
   );
 }
