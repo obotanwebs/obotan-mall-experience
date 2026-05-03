@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Truck, Shield, RefreshCcw } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
+import { BrandsMarquee } from "@/components/brands-marquee";
 import { PRODUCTS, CATEGORIES, getProduct } from "@/lib/products";
 import { ghs } from "@/lib/currency";
 import heroImg from "@/assets/hero.jpg";
