@@ -7,9 +7,8 @@ import { ghs } from "@/lib/currency";
 import { SectionHeader } from "./index";
 
 export const Route = createFileRoute("/shop")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    category: typeof search.category === "string" ? search.category : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { category?: string } =>
+    typeof search.category === "string" ? { category: search.category } : {},
   head: () => ({
     meta: [
       { title: "Shop — OBOTANMALL" },
