@@ -34,8 +34,8 @@ function CategoriesPage() {
           return (
             <Link
               key={c.slug}
-              to="/categories/$slug"
-              params={{ slug: c.slug }}
+              to="/shop"
+              search={{ category: c.slug }}
               aria-label={`Explore ${c.name}`}
               className="group relative block aspect-[4/3] rounded-3xl overflow-hidden glass-strong focus:outline-none focus:ring-2 focus:ring-primary/50"
             >
