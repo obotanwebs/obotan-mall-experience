@@ -21,6 +21,22 @@ import skincare from "@/assets/p-skincare.jpg";
 import coffeemaker from "@/assets/p-coffeemaker.jpg";
 import pillow from "@/assets/p-pillow.jpg";
 import beltwatch from "@/assets/p-belt.jpg";
+import iphone from "@/assets/p-iphone.jpg";
+import macbook from "@/assets/p-macbook.jpg";
+import dell from "@/assets/p-dell.jpg";
+import airfryer from "@/assets/p-airfryer.jpg";
+import gamingchair from "@/assets/p-gamingchair.jpg";
+import washer from "@/assets/p-washer.jpg";
+import portfan from "@/assets/p-fan.jpg";
+import goldwatch from "@/assets/p-goldwatch.jpg";
+import sofa from "@/assets/p-sofa.jpg";
+import mattress from "@/assets/p-mattress.jpg";
+import blender from "@/assets/p-blender.jpg";
+import ricecooker from "@/assets/p-ricecooker.jpg";
+import smarttv from "@/assets/p-tv.jpg";
+import cloudlamp from "@/assets/p-cloudlamp.jpg";
+import vacuum from "@/assets/p-vacuum.jpg";
+import tumbler from "@/assets/p-tumbler.jpg";
 
 export type ProductStatus = "in-stock" | "waiting" | "pre-order";
 
@@ -196,6 +212,108 @@ export const PRODUCTS: Product[] = [
     category: "accessories", price: 269, image: beltwatch, images: [beltwatch],
     description: "Stainless chronograph with sapphire crystal and full-grain leather strap.",
     status: "pre-order", rating: 4.7, reviews: 184,
+  },
+  {
+    id: "25", slug: "apple-iphone-15-pro-max", name: "Apple iPhone 15 Pro Max",
+    category: "electronics", price: 1199, image: iphone, images: [iphone],
+    description: "Titanium flagship with A17 Pro chip, 48MP camera and ProMotion display.",
+    status: "pre-order", rating: 4.9, reviews: 0,
+  },
+  {
+    id: "26", slug: "apple-iphone-15", name: "Apple iPhone 15",
+    category: "electronics", price: 899, image: iphone, images: [iphone],
+    description: "Dynamic Island, USB-C and the powerful A16 Bionic chip.",
+    status: "pre-order", rating: 4.8, reviews: 0,
+  },
+  {
+    id: "27", slug: "macbook-pro-16", name: "MacBook Pro 16\"",
+    category: "electronics", price: 2499, image: macbook, images: [macbook],
+    description: "Pro-grade Apple silicon laptop with Liquid Retina XDR display and all-day battery.",
+    status: "pre-order", rating: 4.9, reviews: 0,
+  },
+  {
+    id: "28", slug: "dell-xps-15-laptop", name: "Dell XPS 15 Laptop",
+    category: "electronics", price: 1799, image: dell, images: [dell],
+    description: "Ultra-thin Windows powerhouse with InfinityEdge display and Intel Core i7.",
+    status: "pre-order", rating: 4.7, reviews: 0,
+  },
+  {
+    id: "29", slug: "everfry-air-fryer", name: "EverFry Digital Air Fryer",
+    category: "home", price: 159, image: airfryer, images: [airfryer],
+    description: "5.5L touchscreen air fryer with 8 smart cooking presets.",
+    status: "pre-order", rating: 4.7, reviews: 0,
+  },
+  {
+    id: "30", slug: "throne-pro-gaming-chair", name: "Throne Pro Gaming Chair",
+    category: "home", price: 329, image: gamingchair, images: [gamingchair],
+    description: "Ergonomic racing-style chair with lumbar support and 4D armrests.",
+    status: "pre-order", rating: 4.6, reviews: 0,
+  },
+  {
+    id: "31", slug: "fresh-spin-washing-machine", name: "FreshSpin Washing Machine",
+    category: "home", price: 749, image: washer, images: [washer],
+    description: "9kg front-load washer with inverter motor and 15 wash programs.",
+    status: "pre-order", rating: 4.6, reviews: 0,
+  },
+  {
+    id: "32", slug: "breeze-portable-fan", name: "Breeze Portable Fan",
+    category: "gadgets", price: 49, image: portfan, images: [portfan],
+    description: "Rechargeable handheld fan with 4 speeds and 12-hour battery life.",
+    status: "in-stock", rating: 4.5, reviews: 0,
+  },
+  {
+    id: "33", slug: "regalia-gold-watch", name: "Regalia Gold Watch",
+    category: "accessories", price: 449, image: goldwatch, images: [goldwatch],
+    description: "18K gold-plated stainless steel chronograph with sapphire crystal.",
+    status: "pre-order", rating: 4.8, reviews: 0,
+  },
+  {
+    id: "34", slug: "haven-3-seater-sofa", name: "Haven 3-Seater Sofa",
+    category: "home", price: 1099, image: sofa, images: [sofa],
+    description: "Mid-century modern fabric sofa with solid wood legs and deep cushions.",
+    status: "pre-order", rating: 4.7, reviews: 0,
+  },
+  {
+    id: "35", slug: "dreamcloud-memory-mattress", name: "DreamCloud Memory Mattress",
+    category: "home", price: 599, image: mattress, images: [mattress],
+    description: "Queen-size memory foam mattress with cooling-gel layer and 10-year warranty.",
+    status: "pre-order", rating: 4.8, reviews: 0,
+  },
+  {
+    id: "36", slug: "whirlmix-pro-blender", name: "WhirlMix Pro Blender",
+    category: "home", price: 129, image: blender, images: [blender],
+    description: "1500W high-speed blender with 1.8L glass jar and pulse control.",
+    status: "in-stock", rating: 4.6, reviews: 0,
+  },
+  {
+    id: "37", slug: "perfect-grain-rice-cooker", name: "Perfect Grain Rice Cooker",
+    category: "home", price: 89, image: ricecooker, images: [ricecooker],
+    description: "10-cup digital rice cooker with steamer basket and keep-warm mode.",
+    status: "in-stock", rating: 4.6, reviews: 0,
+  },
+  {
+    id: "38", slug: "vista-55-smart-tv", name: "Vista 55\" 4K Smart TV",
+    category: "electronics", price: 699, image: smarttv, images: [smarttv],
+    description: "55-inch 4K UHD smart TV with HDR10, Dolby Vision and built-in streaming apps.",
+    status: "pre-order", rating: 4.7, reviews: 0,
+  },
+  {
+    id: "39", slug: "neon-cloud-lamp", name: "Neon Cloud LED Lamp",
+    category: "home", price: 39, image: cloudlamp, images: [cloudlamp],
+    description: "Viral TikTok cloud-shaped neon LED lamp — perfect aesthetic mood lighting.",
+    status: "in-stock", rating: 4.7, reviews: 0,
+  },
+  {
+    id: "40", slug: "mini-cordless-vacuum", name: "Mini Cordless Vacuum",
+    category: "home", price: 79, image: vacuum, images: [vacuum],
+    description: "Trending lightweight cordless stick vacuum with 30-minute runtime.",
+    status: "in-stock", rating: 4.6, reviews: 0,
+  },
+  {
+    id: "41", slug: "hydro-tumbler-cup", name: "Hydro Tumbler 40oz",
+    category: "accessories", price: 45, image: tumbler, images: [tumbler],
+    description: "TikTok-famous insulated tumbler with handle — keeps drinks cold for 24h.",
+    status: "in-stock", rating: 4.8, reviews: 0,
   },
 ];
 
