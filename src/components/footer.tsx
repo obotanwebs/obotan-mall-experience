@@ -27,7 +27,7 @@ export function Footer() {
           </div>
         </div>
         <FooterCol title="Shop" links={[["All Products","/shop"],["Categories","/categories"],["New Arrivals","/shop"],["Pre-order","/shop"]]} />
-        <FooterCol title="Support" links={[["Contact","/contact"],["Track Order","/track"],["Shipping","/about"],["Returns","/about"]]} />
+        <FooterCol title="Support" links={[["Contact","/contact"],["FAQ","/faq"],["Track Order","/track"],["Shipping","/about"],["Returns","/about"]]} />
         <FooterCol title="Company" links={[["About","/about"],["Careers","/about"],["Privacy","/about"],["Terms","/about"]]} />
       </div>
       <div className="border-t border-glass-border py-6 text-center text-xs text-muted-foreground">
