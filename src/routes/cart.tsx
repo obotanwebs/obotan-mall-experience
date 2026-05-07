@@ -34,7 +34,7 @@ function CartPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 md:px-8 py-12">
       <SectionHeader eyebrow="Cart" title="Your shopping bag" />
-      <div className="grid lg:grid-cols-[1fr_400px] gap-8">
+      <div className="grid lg:grid-cols-[1fr_minmax(0,400px)] gap-8">
         <div className="space-y-4">
           {items.map((it) => {
             const ship = it.shipping ? SHIPPING_OPTIONS.find((o) => o.id === it.shipping) : null;
