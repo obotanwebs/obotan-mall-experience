@@ -148,6 +148,7 @@ function Field({ label, className = "", ...props }: React.InputHTMLAttributes<HT
 }
 
 function MomoInstructions({ total }: { total: number }) {
+  const items = useCart((s) => s.items);
   const copy = (value: string, label: string) => {
     navigator.clipboard.writeText(value);
     toast.success(`${label} copied`);
