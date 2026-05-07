@@ -27,8 +27,8 @@ export function Navbar() {
       <div className="absolute inset-x-0 top-0 h-full bg-background/40 backdrop-blur-xl border-b border-glass-border" />
       <nav className="relative mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 md:px-8">
         <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--gradient-primary)] text-primary-foreground shadow-glow">
-            O
+          <span className="grid h-10 w-10 place-items-center rounded-xl overflow-hidden bg-black shadow-glow">
+            <img src={logo} alt="OBOTANMALL logo" className="h-full w-full object-cover" />
           </span>
           <span className="hidden sm:block">OBOTANMALL</span>
         </Link>
