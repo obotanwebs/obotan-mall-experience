@@ -58,9 +58,9 @@ function Shop() {
           <option value="all">All categories</option>
           {CATEGORIES.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
         </select>
-        <div className="flex items-center gap-3 px-2">
-          <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
-          <input type="range" min={50} max={2000} step={50} value={maxPrice} onChange={(e) => setMaxPrice(+e.target.value)} className="accent-[var(--primary)]" />
+        <div className="flex items-center gap-3 px-2 min-w-0">
+          <SlidersHorizontal className="h-4 w-4 text-muted-foreground shrink-0" />
+          <input type="range" min={50} max={2000} step={50} value={maxPrice} onChange={(e) => setMaxPrice(+e.target.value)} className="accent-[var(--primary)] min-w-0 flex-1 md:flex-none md:w-40" />
           <span className="text-sm font-medium whitespace-nowrap">≤ {ghs(maxPrice)}</span>
         </div>
       </div>
