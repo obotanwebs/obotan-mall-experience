@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { SectionHeader } from "./index";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { GoogleMap } from "@/components/google-map";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -52,7 +53,7 @@ function ContactPage() {
 
           {[
             { icon: Mail, title: "Email", value: "hello@obotanmall.com" },
-            { icon: MapPin, title: "HQ", value: "Lagos · London · Singapore" },
+            { icon: MapPin, title: "Address", value: "Ashongman Estate, Last Stop, Greater Accra, Ghana" },
           ].map((c) => (
             <div key={c.title} className="glass-strong rounded-3xl p-6 flex items-start gap-4">
               <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[var(--gradient-primary)] text-primary-foreground"><c.icon className="h-5 w-5" /></div>
@@ -71,6 +72,11 @@ function ContactPage() {
           </label>
           <button type="submit" className="w-full rounded-full bg-foreground text-background px-7 py-3.5 text-sm font-semibold shadow-glow hover:scale-[1.02] transition">Send message</button>
         </form>
+      </div>
+
+      <div className="mt-10">
+        <h2 className="font-display text-2xl font-bold mb-4">Find us on the map</h2>
+        <GoogleMap />
       </div>
 
       <WhatsAppFloat />

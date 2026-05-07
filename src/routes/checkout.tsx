@@ -148,11 +148,16 @@ function Field({ label, className = "", ...props }: React.InputHTMLAttributes<HT
 }
 
 function MomoInstructions({ total }: { total: number }) {
+  const items = useCart((s) => s.items);
   const copy = (value: string, label: string) => {
     navigator.clipboard.writeText(value);
     toast.success(`${label} copied`);
   };
-  const waMsg = `Hello OBOTANMALL, I have made a Mobile Money payment of ${ghs(total)}. Here is my transaction reference:`;
+  const orderLines = items.map((it) => {
+    const ship = it.shipping ? SHIPPING_OPTIONS.find((o) => o.id === it.shipping) : null;
+    return `• ${it.product.name} × ${it.qty} — ${ghs((it.product.price + (ship?.cost ?? 0)) * it.qty)}${ship ? ` (${ship.label})` : ""}`;
+  }).join("\n");
+  const waMsg = `Hello OBOTANMALL, I have made a Mobile Money payment of ${ghs(total)} for the following order:\n\n${orderLines}\n\nTotal: ${ghs(total)}\n\nHere is my transaction reference:`;
   const waHref = `https://wa.me/233203662465?text=${encodeURIComponent(waMsg)}`;
 
   return (
