@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Twitter, Facebook, Youtube } from "lucide-react";
+import logo from "@/assets/logo.jpeg";
 
 export function Footer() {
   return (
@@ -8,7 +9,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 md:px-8 py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-1">
           <div className="flex items-center gap-2 font-display text-lg font-bold">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--gradient-primary)] text-primary-foreground">O</span>
+            <span className="grid h-10 w-10 place-items-center rounded-xl overflow-hidden bg-black"><img src={logo} alt="OBOTANMALL logo" className="h-full w-full object-cover" /></span>
             OBOTANMALL
           </div>
           <p className="mt-4 text-sm text-muted-foreground max-w-xs">
