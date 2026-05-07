@@ -40,18 +40,18 @@ function CartPage() {
             const ship = it.shipping ? SHIPPING_OPTIONS.find((o) => o.id === it.shipping) : null;
             const line = (it.product.price + (ship?.cost ?? 0)) * it.qty;
             return (
-              <div key={it.product.id} className="glass-strong rounded-3xl p-4 flex gap-4 items-center">
-                <Link to="/product/$slug" params={{ slug: it.product.slug }} className="block h-24 w-24 rounded-2xl overflow-hidden flex-shrink-0">
+              <div key={it.product.id} className="glass-strong rounded-3xl p-4 flex flex-wrap sm:flex-nowrap gap-4 items-center">
+                <Link to="/product/$slug" params={{ slug: it.product.slug }} className="block h-20 w-20 sm:h-24 sm:w-24 rounded-2xl overflow-hidden flex-shrink-0">
                   <img src={it.product.image} alt={it.product.name} className="h-full w-full object-cover" />
                 </Link>
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 basis-[calc(100%-6rem)] sm:basis-auto">
                   <Link to="/product/$slug" params={{ slug: it.product.slug }} className="font-semibold hover:underline truncate block">{it.product.name}</Link>
                   <p className="text-xs text-muted-foreground capitalize">{it.product.category}</p>
                   {it.product.status === "pre-order" && (
                     <select
                       value={it.shipping ?? "air"}
                       onChange={(e) => setShipping(it.product.id, e.target.value as "air" | "sea")}
-                      className="mt-2 text-xs rounded-full bg-background/40 border border-glass-border px-3 py-1"
+                      className="mt-2 max-w-full text-xs rounded-full bg-background/40 border border-glass-border px-3 py-1"
                     >
                       {SHIPPING_OPTIONS.map((o) => <option key={o.id} value={o.id}>{o.icon} {o.label} (+{ghs(o.cost)}, {o.days})</option>)}
                     </select>
@@ -62,7 +62,7 @@ function CartPage() {
                   <span className="w-6 text-center font-semibold">{it.qty}</span>
                   <button onClick={() => setQty(it.product.id, it.qty + 1)} className="h-8 w-8 grid place-items-center rounded-full glass hover:bg-foreground/10"><Plus className="h-3 w-3" /></button>
                 </div>
-                <div className="text-right min-w-[80px]">
+                <div className="text-right min-w-[80px] ml-auto">
                   <div className="font-display font-bold">{ghs(line)}</div>
                   <button onClick={() => remove(it.product.id)} className="mt-1 text-xs text-muted-foreground hover:text-destructive inline-flex items-center gap-1"><Trash2 className="h-3 w-3" /> Remove</button>
                 </div>
