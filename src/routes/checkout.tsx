@@ -57,7 +57,7 @@ function Checkout() {
   return (
     <div className="mx-auto max-w-7xl px-4 md:px-8 py-12">
       <SectionHeader eyebrow="Checkout" title="Almost there" />
-      <form onSubmit={submit} className="grid lg:grid-cols-[1fr_400px] gap-8">
+      <form onSubmit={submit} className="grid lg:grid-cols-[1fr_minmax(0,400px)] gap-8">
         <div className="space-y-6">
           <Card title="Contact & shipping">
             <div className="grid sm:grid-cols-2 gap-3">
