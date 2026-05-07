@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { SectionHeader } from "./index";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { GoogleMap } from "@/components/google-map";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
