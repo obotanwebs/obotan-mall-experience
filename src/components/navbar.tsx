@@ -3,6 +3,7 @@ import { Search, ShoppingBag, Heart, Sun, Moon, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useCart, useWishlist, useTheme } from "@/lib/store";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.jpeg";
 
 const NAV = [
   { to: "/", label: "Home" },
