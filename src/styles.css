@@ -139,6 +139,10 @@
 
 @layer base {
   * { border-color: var(--color-border); }
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
   html { scroll-behavior: smooth; }
   body {
     background-color: var(--color-background);
@@ -146,6 +150,11 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     font-feature-settings: "ss01", "cv11";
+  }
+  img, video { max-width: 100%; height: auto; }
+  /* Prevent iOS zoom on input focus */
+  @media (max-width: 640px) {
+    input, select, textarea { font-size: 16px; }
   }
 }
 
