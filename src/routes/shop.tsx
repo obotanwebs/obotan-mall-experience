@@ -45,7 +45,7 @@ function Shop() {
     <div className="mx-auto max-w-7xl px-4 md:px-8 py-12">
       <SectionHeader eyebrow="Catalog" title="Shop everything" subtitle={`${PRODUCTS.length} products curated for you.`} />
 
-      <div className="glass-strong rounded-3xl p-5 mb-10 grid gap-4 md:grid-cols-[1fr_auto_auto] items-center">
+      <div className="glass-strong rounded-3xl p-5 mb-10 grid gap-4 md:grid-cols-[1fr_auto_auto] items-center min-w-0">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
