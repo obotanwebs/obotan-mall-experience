@@ -74,6 +74,11 @@ function ContactPage() {
         </form>
       </div>
 
+      <div className="mt-10">
+        <h2 className="font-display text-2xl font-bold mb-4">Find us on the map</h2>
+        <GoogleMap />
+      </div>
+
       <WhatsAppFloat />
     </div>
   );
