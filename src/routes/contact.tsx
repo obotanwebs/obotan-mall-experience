@@ -53,7 +53,7 @@ function ContactPage() {
 
           {[
             { icon: Mail, title: "Email", value: "hello@obotanmall.com" },
-            { icon: MapPin, title: "HQ", value: "Lagos · London · Singapore" },
+            { icon: MapPin, title: "Address", value: "Ashongman Estate, Last Stop, Greater Accra, Ghana" },
           ].map((c) => (
             <div key={c.title} className="glass-strong rounded-3xl p-6 flex items-start gap-4">
               <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[var(--gradient-primary)] text-primary-foreground"><c.icon className="h-5 w-5" /></div>
