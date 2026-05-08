@@ -3,17 +3,28 @@ import { persist } from "zustand/middleware";
 import type { Product } from "./products";
 
 export interface CartItem {
+  key: string;                                // unique per product+variant combo
   product: Product;
   qty: number;
   shipping?: "air" | "sea";
+  variants?: Record<string, string>;          // selected variant values
+  unitPrice: number;                          // resolved price (incl. variant deltas)
+}
+
+function variantSig(variants?: Record<string, string>) {
+  if (!variants) return "";
+  return Object.keys(variants).sort().map((k) => `${k}:${variants[k]}`).join("|");
 }
 
 interface CartState {
   items: CartItem[];
-  add: (product: Product, opts?: { shipping?: "air" | "sea"; qty?: number }) => void;
-  remove: (id: string) => void;
-  setQty: (id: string, qty: number) => void;
-  setShipping: (id: string, shipping: "air" | "sea") => void;
+  add: (
+    product: Product,
+    opts?: { shipping?: "air" | "sea"; qty?: number; variants?: Record<string, string>; unitPrice?: number }
+  ) => void;
+  remove: (key: string) => void;
+  setQty: (key: string, qty: number) => void;
+  setShipping: (key: string, shipping: "air" | "sea") => void;
   clear: () => void;
 }
 
@@ -23,18 +34,40 @@ export const useCart = create<CartState>()(
       items: [],
       add: (product, opts) =>
         set((s) => {
-          const existing = s.items.find((i) => i.product.id === product.id);
+          const key = `${product.id}::${variantSig(opts?.variants)}`;
+          const unitPrice = opts?.unitPrice ?? product.price;
+          const existing = s.items.find((i) => i.key === key);
           if (existing) {
-            return { items: s.items.map((i) => i.product.id === product.id ? { ...i, qty: i.qty + (opts?.qty ?? 1) } : i) };
+            return { items: s.items.map((i) => i.key === key ? { ...i, qty: i.qty + (opts?.qty ?? 1) } : i) };
           }
-          return { items: [...s.items, { product, qty: opts?.qty ?? 1, shipping: opts?.shipping }] };
+          return {
+            items: [...s.items, {
+              key, product, qty: opts?.qty ?? 1,
+              shipping: opts?.shipping, variants: opts?.variants, unitPrice,
+            }],
+          };
         }),
-      remove: (id) => set((s) => ({ items: s.items.filter((i) => i.product.id !== id) })),
-      setQty: (id, qty) => set((s) => ({ items: s.items.map((i) => i.product.id === id ? { ...i, qty: Math.max(1, qty) } : i) })),
-      setShipping: (id, shipping) => set((s) => ({ items: s.items.map((i) => i.product.id === id ? { ...i, shipping } : i) })),
+      remove: (key) => set((s) => ({ items: s.items.filter((i) => i.key !== key) })),
+      setQty: (key, qty) => set((s) => ({ items: s.items.map((i) => i.key === key ? { ...i, qty: Math.max(1, qty) } : i) })),
+      setShipping: (key, shipping) => set((s) => ({ items: s.items.map((i) => i.key === key ? { ...i, shipping } : i) })),
       clear: () => set({ items: [] }),
     }),
-    { name: "obotanmall-cart" }
+    {
+      name: "obotanmall-cart",
+      version: 2,
+      migrate: (persisted: any) => {
+        if (!persisted?.items) return persisted;
+        persisted.items = persisted.items.map((i: any) => ({
+          key: i.key ?? `${i.product.id}::`,
+          product: i.product,
+          qty: i.qty,
+          shipping: i.shipping,
+          variants: i.variants,
+          unitPrice: i.unitPrice ?? i.product.price,
+        }));
+        return persisted;
+      },
+    }
   )
 );
 
