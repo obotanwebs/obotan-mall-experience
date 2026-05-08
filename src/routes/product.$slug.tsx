@@ -1,11 +1,16 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Heart, ShoppingBag, Bell, Star, Truck, ShieldCheck, ArrowLeft } from "lucide-react";
+import { Heart, ShoppingBag, Bell, Star, Truck, ShieldCheck, ArrowLeft, Minus, Plus } from "lucide-react";
 import { toast } from "sonner";
-import { getProduct, PRODUCTS, SHIPPING_OPTIONS, STATUS_META } from "@/lib/products";
+import {
+  getProduct, PRODUCTS, SHIPPING_OPTIONS, STATUS_META,
+  computeVariantPrice, defaultSelectedVariants, variantImagesFor,
+} from "@/lib/products";
 import { useCart, useWishlist } from "@/lib/store";
 import { ProductCard } from "@/components/product-card";
+import { ProductImageCarousel } from "@/components/product-image-carousel";
+import { ProductVariantSelector } from "@/components/product-variant-selector";
 import { ghs } from "@/lib/currency";
 
 export const Route = createFileRoute("/product/$slug")({
@@ -22,6 +27,19 @@ function ProductPage() {
   const wished = useWishlist((s) => product ? s.ids.includes(product.id) : false);
   const [shipping, setShipping] = useState<"air" | "sea">("air");
   const [notifyEmail, setNotifyEmail] = useState("");
+  const [qty, setQty] = useState(1);
+  const [selected, setSelected] = useState<Record<string, string>>(
+    () => product ? defaultSelectedVariants(product) : {}
+  );
+
+  const unitPrice = useMemo(
+    () => product ? computeVariantPrice(product, selected) : 0,
+    [product, selected]
+  );
+  const galleryImages = useMemo(
+    () => product ? variantImagesFor(product, selected) : [],
+    [product, selected]
+  );
 
   if (!product) {
     return (
@@ -34,8 +52,15 @@ function ProductPage() {
 
   const meta = STATUS_META[product.status];
   const shipOpt = SHIPPING_OPTIONS.find((o) => o.id === shipping)!;
-  const total = product.status === "pre-order" ? product.price + shipOpt.cost : product.price;
+  const total = product.status === "pre-order" ? unitPrice + shipOpt.cost : unitPrice;
   const related = PRODUCTS.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+  const hasVariants = !!product.variantGroups?.length;
+
+  const handleAdd = (goToCart: boolean) => {
+    add(product, { shipping, qty, variants: hasVariants ? selected : undefined, unitPrice });
+    toast.success(product.status === "pre-order" ? "Pre-order added to cart" : "Added to cart");
+    if (goToCart) navigate({ to: "/cart" });
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-4 md:px-8 py-8 md:py-12">
@@ -44,14 +69,17 @@ function ProductPage() {
       </Link>
 
       <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }}
-          className="relative aspect-square rounded-[2rem] overflow-hidden glass-strong shadow-glass"
-        >
-          <img src={product.image} alt={product.name} width={800} height={800} className="h-full w-full object-cover" />
-          <span className={`absolute top-5 left-5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md border ${meta.color}`}>
-            <span className="h-1.5 w-1.5 rounded-full bg-current" />
-            {meta.label}
-          </span>
+        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }}>
+          <ProductImageCarousel
+            images={galleryImages}
+            alt={product.name}
+            badge={
+              <span className={`absolute top-5 left-5 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md border ${meta.color}`}>
+                <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                {meta.label}
+              </span>
+            }
+          />
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
@@ -68,13 +96,29 @@ function ProductPage() {
 
           <p className="mt-6 text-muted-foreground leading-relaxed">{product.description}</p>
 
+          {hasVariants && (
+            <div className="mt-8 glass-strong rounded-3xl p-6">
+              <ProductVariantSelector
+                groups={product.variantGroups!}
+                selected={selected}
+                onChange={(type, value) => setSelected((s) => ({ ...s, [type]: value }))}
+              />
+            </div>
+          )}
+
           {/* Pricing */}
-          <div className="mt-8 glass-strong rounded-3xl p-6">
+          <div className="mt-6 glass-strong rounded-3xl p-6">
             {product.status === "pre-order" ? (
               <>
                 <div className="flex items-baseline justify-between gap-4">
                   <span className="text-sm text-muted-foreground">Product price</span>
-                  <span className="font-display text-2xl font-bold">{ghs(product.price)}</span>
+                  <motion.span
+                    key={unitPrice}
+                    initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
+                    className="font-display text-2xl font-bold"
+                  >
+                    {ghs(unitPrice)}
+                  </motion.span>
                 </div>
                 <p className="mt-5 text-sm font-semibold mb-3">Choose shipping method</p>
                 <div className="grid sm:grid-cols-2 gap-3">
@@ -101,31 +145,63 @@ function ProductPage() {
                   </div>
                   <div className="text-right">
                     <div className="text-xs text-muted-foreground">Total</div>
-                    <div className="font-display text-3xl font-bold gradient-text">{ghs(total)}</div>
+                    <motion.div
+                      key={total}
+                      initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
+                      className="font-display text-3xl font-bold gradient-text"
+                    >
+                      {ghs(total * qty)}
+                    </motion.div>
                   </div>
                 </div>
               </>
             ) : (
               <div className="flex items-baseline justify-between gap-4">
                 <span className="text-sm text-muted-foreground">Price</span>
-                <span className="font-display text-3xl font-bold gradient-text">{ghs(product.price)}</span>
+                <motion.span
+                  key={unitPrice}
+                  initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }}
+                  className="font-display text-3xl font-bold gradient-text"
+                >
+                  {ghs(unitPrice * qty)}
+                </motion.span>
               </div>
             )}
           </div>
 
+          {/* Quantity */}
+          {product.status !== "waiting" && (
+            <div className="mt-6 flex items-center gap-3">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">Quantity</span>
+              <div className="flex items-center gap-2 glass rounded-full px-2 py-1">
+                <button onClick={() => setQty((q) => Math.max(1, q - 1))} className="h-8 w-8 grid place-items-center rounded-full hover:bg-foreground/10" aria-label="Decrease quantity"><Minus className="h-3 w-3" /></button>
+                <span className="w-8 text-center font-semibold">{qty}</span>
+                <button onClick={() => setQty((q) => q + 1)} className="h-8 w-8 grid place-items-center rounded-full hover:bg-foreground/10" aria-label="Increase quantity"><Plus className="h-3 w-3" /></button>
+              </div>
+            </div>
+          )}
+
           {/* Action */}
           <div className="mt-6 flex flex-wrap gap-3">
             {product.status === "in-stock" && (
-              <button
-                onClick={() => { add(product); toast.success("Added to cart"); }}
-                className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-foreground text-background px-7 py-4 text-sm font-semibold shadow-glow hover:scale-[1.02] transition"
-              >
-                <ShoppingBag className="h-4 w-4" /> Add to cart
-              </button>
+              <>
+                <button
+                  onClick={() => handleAdd(false)}
+                  className="flex-1 min-w-[10rem] inline-flex items-center justify-center gap-2 rounded-full glass-strong px-7 py-4 text-sm font-semibold hover:scale-[1.02] transition"
+                >
+                  <ShoppingBag className="h-4 w-4" /> Add to cart
+                </button>
+                <button
+                  onClick={() => handleAdd(true)}
+                  className="flex-1 min-w-[10rem] inline-flex items-center justify-center gap-2 rounded-full bg-foreground text-background px-7 py-4 text-sm font-semibold shadow-glow hover:scale-[1.02] transition"
+                >
+                  Buy now
+                </button>
+              </>
             )}
             {product.status === "pre-order" && (
               <button
-                onClick={() => { add(product, { shipping }); toast.success("Pre-order added to cart"); navigate({ to: "/cart" }); }}
+                onClick={() => handleAdd(true)}
                 className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-foreground text-background px-7 py-4 text-sm font-semibold shadow-glow hover:scale-[1.02] transition"
               >
                 <ShoppingBag className="h-4 w-4" /> Pre-order now
