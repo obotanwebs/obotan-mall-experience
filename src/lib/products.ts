@@ -99,10 +99,10 @@ export const PRODUCTS: Product[] = [
     status: "pre-order", rating: 4.7, reviews: 642,
   },
   {
-    id: "3", slug: "nova-edge-phone", name: "Nova Edge Phone",
-    category: "electronics", price: 899, image: phone, images: [phone],
-    description: "Flagship 6.7\" OLED, triple-lens 50MP camera and pro-grade neural chip.",
-    status: "waiting", rating: 4.9, reviews: 2104,
+    id: "3", slug: "apple-iphone-17-pro-max", name: "Apple iPhone 17 Pro Max",
+    category: "electronics", price: 1399, image: iphone, images: [iphone],
+    description: "Titanium flagship with the A19 Pro chip, 5x telephoto and ProMotion display.",
+    status: "pre-order", rating: 4.9, reviews: 2104,
   },
   {
     id: "4", slug: "cloud-runner-sneakers", name: "Cloud Runner Sneakers",
@@ -123,8 +123,8 @@ export const PRODUCTS: Product[] = [
     status: "pre-order", rating: 4.5, reviews: 209,
   },
   {
-    id: "7", slug: "prism-laptop-15", name: "Prism Laptop 15",
-    category: "electronics", price: 1599, image: laptop, images: [laptop],
+    id: "7", slug: "macbook-pro-15", name: "MacBook Pro 15\"",
+    category: "electronics", price: 1899, image: macbook, images: [macbook],
     description: "15\" Liquid Retina, M-class chip, 18h battery and silent thermal design.",
     status: "in-stock", rating: 4.9, reviews: 942,
   },
@@ -249,10 +249,10 @@ export const PRODUCTS: Product[] = [
     status: "pre-order", rating: 4.9, reviews: 0,
   },
   {
-    id: "28", slug: "dell-xps-15-laptop", name: "Dell XPS 15 Laptop",
-    category: "electronics", price: 1799, image: dell, images: [dell],
-    description: "Ultra-thin Windows powerhouse with InfinityEdge display and Intel Core i7.",
-    status: "pre-order", rating: 4.7, reviews: 0,
+    id: "28", slug: "macbook-air-13", name: "MacBook Air 13\"",
+    category: "electronics", price: 1299, image: macbook, images: [macbook],
+    description: "Strikingly thin Apple silicon laptop with all-day battery and Liquid Retina display.",
+    status: "pre-order", rating: 4.8, reviews: 0,
   },
   {
     id: "29", slug: "everfry-air-fryer", name: "EverFry Digital Air Fryer",
