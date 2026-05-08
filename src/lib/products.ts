@@ -40,6 +40,21 @@ import tumbler from "@/assets/p-tumbler.jpg";
 
 export type ProductStatus = "in-stock" | "waiting" | "pre-order";
 
+export type VariantType = "color" | "size" | "storage" | "memory" | "model";
+
+export interface VariantOption {
+  value: string;
+  label?: string;
+  swatch?: string;     // CSS color for color swatches
+  priceDelta?: number; // additive on top of base price
+}
+
+export interface VariantGroup {
+  type: VariantType;
+  label: string;
+  options: VariantOption[];
+}
+
 export interface Product {
   id: string;
   slug: string;
@@ -52,6 +67,8 @@ export interface Product {
   status: ProductStatus;
   rating: number;
   reviews: number;
+  variantGroups?: VariantGroup[];
+  colorImages?: Record<string, string[]>; // color value -> ordered images
 }
 
 export const CATEGORIES = [
