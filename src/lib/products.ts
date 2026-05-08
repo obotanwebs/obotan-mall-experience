@@ -40,6 +40,21 @@ import tumbler from "@/assets/p-tumbler.jpg";
 
 export type ProductStatus = "in-stock" | "waiting" | "pre-order";
 
+export type VariantType = "color" | "size" | "storage" | "memory" | "model";
+
+export interface VariantOption {
+  value: string;
+  label?: string;
+  swatch?: string;     // CSS color for color swatches
+  priceDelta?: number; // additive on top of base price
+}
+
+export interface VariantGroup {
+  type: VariantType;
+  label: string;
+  options: VariantOption[];
+}
+
 export interface Product {
   id: string;
   slug: string;
@@ -52,6 +67,8 @@ export interface Product {
   status: ProductStatus;
   rating: number;
   reviews: number;
+  variantGroups?: VariantGroup[];
+  colorImages?: Record<string, string[]>; // color value -> ordered images
 }
 
 export const CATEGORIES = [
@@ -82,10 +99,10 @@ export const PRODUCTS: Product[] = [
     status: "pre-order", rating: 4.7, reviews: 642,
   },
   {
-    id: "3", slug: "nova-edge-phone", name: "Nova Edge Phone",
-    category: "electronics", price: 899, image: phone, images: [phone],
-    description: "Flagship 6.7\" OLED, triple-lens 50MP camera and pro-grade neural chip.",
-    status: "waiting", rating: 4.9, reviews: 2104,
+    id: "3", slug: "apple-iphone-17-pro-max", name: "Apple iPhone 17 Pro Max",
+    category: "electronics", price: 1399, image: iphone, images: [iphone],
+    description: "Titanium flagship with the A19 Pro chip, 5x telephoto and ProMotion display.",
+    status: "pre-order", rating: 4.9, reviews: 2104,
   },
   {
     id: "4", slug: "cloud-runner-sneakers", name: "Cloud Runner Sneakers",
@@ -106,8 +123,8 @@ export const PRODUCTS: Product[] = [
     status: "pre-order", rating: 4.5, reviews: 209,
   },
   {
-    id: "7", slug: "prism-laptop-15", name: "Prism Laptop 15",
-    category: "electronics", price: 1599, image: laptop, images: [laptop],
+    id: "7", slug: "macbook-pro-15", name: "MacBook Pro 15\"",
+    category: "electronics", price: 1899, image: macbook, images: [macbook],
     description: "15\" Liquid Retina, M-class chip, 18h battery and silent thermal design.",
     status: "in-stock", rating: 4.9, reviews: 942,
   },
@@ -232,10 +249,10 @@ export const PRODUCTS: Product[] = [
     status: "pre-order", rating: 4.9, reviews: 0,
   },
   {
-    id: "28", slug: "dell-xps-15-laptop", name: "Dell XPS 15 Laptop",
-    category: "electronics", price: 1799, image: dell, images: [dell],
-    description: "Ultra-thin Windows powerhouse with InfinityEdge display and Intel Core i7.",
-    status: "pre-order", rating: 4.7, reviews: 0,
+    id: "28", slug: "macbook-air-13", name: "MacBook Air 13\"",
+    category: "electronics", price: 1299, image: macbook, images: [macbook],
+    description: "Strikingly thin Apple silicon laptop with all-day battery and Liquid Retina display.",
+    status: "pre-order", rating: 4.8, reviews: 0,
   },
   {
     id: "29", slug: "everfry-air-fryer", name: "EverFry Digital Air Fryer",
@@ -317,6 +334,58 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
+// ── Variant catalog ──────────────────────────────────────────────────────────
+const FASHION_SLUGS = new Set([
+  "cloud-runner-sneakers", "drift-canvas-jacket",
+  "indigo-slim-jeans", "essential-cotton-tee",
+]);
+
+const COLOR_SWATCHES: Record<string, string> = {
+  Black: "#111", White: "#f5f5f5", Brown: "#5a3a1f",
+  Silver: "#c8c9cc", Titanium: "#8a8a87", Blue: "#2b6cb0",
+};
+
+const fashionVariants = (): VariantGroup[] => [
+  { type: "size", label: "Size", options: ["S","M","L","XL","2XL","3XL"].map(v => ({ value: v })) },
+  { type: "color", label: "Color", options: ["Black","White","Brown"].map(v => ({ value: v, swatch: COLOR_SWATCHES[v] })) },
+];
+
+const iphoneVariants = (): VariantGroup[] => [
+  { type: "model", label: "Model", options: [
+    { value: "Standard", priceDelta: 0 },
+    { value: "Pro", priceDelta: 300 },
+    { value: "Pro Max", priceDelta: 500 },
+  ]},
+  { type: "storage", label: "Storage", options: [
+    { value: "128GB", priceDelta: 0 },
+    { value: "256GB", priceDelta: 100 },
+    { value: "512GB", priceDelta: 300 },
+    { value: "1TB", priceDelta: 500 },
+  ]},
+  { type: "color", label: "Color", options: ["Black","Silver","White","Titanium","Blue"].map(v => ({ value: v, swatch: COLOR_SWATCHES[v] })) },
+];
+
+const macbookVariants = (): VariantGroup[] => [
+  { type: "memory", label: "Memory", options: [
+    { value: "8GB", priceDelta: 0 },
+    { value: "16GB", priceDelta: 200 },
+    { value: "24GB", priceDelta: 450 },
+  ]},
+  { type: "storage", label: "Storage", options: [
+    { value: "256GB", priceDelta: 0 },
+    { value: "512GB", priceDelta: 200 },
+    { value: "1TB", priceDelta: 500 },
+    { value: "2TB", priceDelta: 900 },
+  ]},
+  { type: "color", label: "Color", options: ["Silver","Black"].map(v => ({ value: v, swatch: COLOR_SWATCHES[v] })) },
+];
+
+for (const p of PRODUCTS) {
+  if (FASHION_SLUGS.has(p.slug)) p.variantGroups = fashionVariants();
+  else if (p.slug.includes("iphone")) p.variantGroups = iphoneVariants();
+  else if (p.slug.includes("macbook")) p.variantGroups = macbookVariants();
+}
+
 export const getProduct = (slug: string) => PRODUCTS.find(p => p.slug === slug);
 
 export const STATUS_META: Record<ProductStatus, { label: string; color: string }> = {
@@ -324,3 +393,25 @@ export const STATUS_META: Record<ProductStatus, { label: string; color: string }
   "waiting":    { label: "Restocking Soon", color: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30" },
   "pre-order":  { label: "Pre-Order",      color: "bg-primary/15 text-primary border-primary/30" },
 };
+
+export function computeVariantPrice(product: Product, selected: Record<string, string>): number {
+  let price = product.price;
+  for (const g of product.variantGroups ?? []) {
+    const opt = g.options.find(o => o.value === selected[g.type]);
+    if (opt?.priceDelta) price += opt.priceDelta;
+  }
+  return price;
+}
+
+export function defaultSelectedVariants(product: Product): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const g of product.variantGroups ?? []) out[g.type] = g.options[0].value;
+  return out;
+}
+
+export function variantImagesFor(product: Product, selected: Record<string, string>): string[] {
+  const color = selected.color;
+  if (color && product.colorImages?.[color]?.length) return product.colorImages[color];
+  return product.images;
+}
+

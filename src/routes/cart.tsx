@@ -15,7 +15,7 @@ function CartPage() {
 
   const subtotal = items.reduce((sum, i) => {
     const ship = i.shipping ? SHIPPING_OPTIONS.find((o) => o.id === i.shipping)?.cost ?? 0 : 0;
-    return sum + (i.product.price + ship) * i.qty;
+    return sum + (i.unitPrice + ship) * i.qty;
   }, 0);
 
   if (items.length === 0) {
@@ -38,19 +38,25 @@ function CartPage() {
         <div className="space-y-4">
           {items.map((it) => {
             const ship = it.shipping ? SHIPPING_OPTIONS.find((o) => o.id === it.shipping) : null;
-            const line = (it.product.price + (ship?.cost ?? 0)) * it.qty;
+            const line = (it.unitPrice + (ship?.cost ?? 0)) * it.qty;
+            const variantSummary = it.variants
+              ? Object.values(it.variants).join(" · ")
+              : null;
             return (
-              <div key={it.product.id} className="glass-strong rounded-3xl p-4 flex flex-wrap sm:flex-nowrap gap-4 items-center">
+              <div key={it.key} className="glass-strong rounded-3xl p-4 flex flex-wrap sm:flex-nowrap gap-4 items-center">
                 <Link to="/product/$slug" params={{ slug: it.product.slug }} className="block h-20 w-20 sm:h-24 sm:w-24 rounded-2xl overflow-hidden flex-shrink-0">
                   <img src={it.product.image} alt={it.product.name} className="h-full w-full object-cover" />
                 </Link>
                 <div className="flex-1 min-w-0 basis-[calc(100%-6rem)] sm:basis-auto">
                   <Link to="/product/$slug" params={{ slug: it.product.slug }} className="font-semibold hover:underline truncate block">{it.product.name}</Link>
                   <p className="text-xs text-muted-foreground capitalize">{it.product.category}</p>
+                  {variantSummary && (
+                    <p className="text-xs text-muted-foreground mt-0.5 truncate">{variantSummary}</p>
+                  )}
                   {it.product.status === "pre-order" && (
                     <select
                       value={it.shipping ?? "air"}
-                      onChange={(e) => setShipping(it.product.id, e.target.value as "air" | "sea")}
+                      onChange={(e) => setShipping(it.key, e.target.value as "air" | "sea")}
                       className="mt-2 max-w-full text-xs rounded-full bg-background/40 border border-glass-border px-3 py-1"
                     >
                       {SHIPPING_OPTIONS.map((o) => <option key={o.id} value={o.id}>{o.icon} {o.label} (+{ghs(o.cost)}, {o.days})</option>)}
@@ -58,13 +64,13 @@ function CartPage() {
                   )}
                 </div>
                 <div className="flex items-center gap-2">
-                  <button onClick={() => setQty(it.product.id, it.qty - 1)} className="h-8 w-8 grid place-items-center rounded-full glass hover:bg-foreground/10"><Minus className="h-3 w-3" /></button>
+                  <button onClick={() => setQty(it.key, it.qty - 1)} className="h-8 w-8 grid place-items-center rounded-full glass hover:bg-foreground/10"><Minus className="h-3 w-3" /></button>
                   <span className="w-6 text-center font-semibold">{it.qty}</span>
-                  <button onClick={() => setQty(it.product.id, it.qty + 1)} className="h-8 w-8 grid place-items-center rounded-full glass hover:bg-foreground/10"><Plus className="h-3 w-3" /></button>
+                  <button onClick={() => setQty(it.key, it.qty + 1)} className="h-8 w-8 grid place-items-center rounded-full glass hover:bg-foreground/10"><Plus className="h-3 w-3" /></button>
                 </div>
                 <div className="text-right min-w-[80px] ml-auto">
                   <div className="font-display font-bold">{ghs(line)}</div>
-                  <button onClick={() => remove(it.product.id)} className="mt-1 text-xs text-muted-foreground hover:text-destructive inline-flex items-center gap-1"><Trash2 className="h-3 w-3" /> Remove</button>
+                  <button onClick={() => remove(it.key)} className="mt-1 text-xs text-muted-foreground hover:text-destructive inline-flex items-center gap-1"><Trash2 className="h-3 w-3" /> Remove</button>
                 </div>
               </div>
             );

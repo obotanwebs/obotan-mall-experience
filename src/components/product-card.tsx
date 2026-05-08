@@ -52,6 +52,19 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           <div className="min-w-0">
             <p className="text-xs uppercase tracking-wider text-muted-foreground">{product.category}</p>
             <h3 className="mt-0.5 font-medium truncate">{product.name}</h3>
+            {(() => {
+              const cg = product.variantGroups?.find((g) => g.type === "color");
+              if (!cg) return null;
+              return (
+                <div className="mt-1.5 flex items-center gap-1">
+                  {cg.options.slice(0, 5).map((o) => (
+                    <span key={o.value} title={o.value}
+                      className="h-3 w-3 rounded-full border border-glass-border"
+                      style={{ background: o.swatch ?? "#888" }} />
+                  ))}
+                </div>
+              );
+            })()}
           </div>
           <p className="font-display text-lg font-semibold whitespace-nowrap">{ghs(product.price)}</p>
         </div>
