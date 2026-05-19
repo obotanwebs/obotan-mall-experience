@@ -19,7 +19,7 @@ import lucid1 from "@/assets/lucid1.jpg";
 import lucid2 from "@/assets/lucid2.jpg";
 import ogshoe from "@/assets/og-shoe.jpg";
 import wmshoe from "@/assets/wm-shoe.jpg";
-import boom1 from "@/assets/boom1.jpg";
+import boom1 from "@/assets/oom1.jpg";
 import boom2 from "@/assets/boom2.jpg";
 import offerway from "@/assets/offerway.jpg";
 import squid from "@/assets/squid.jpg";
