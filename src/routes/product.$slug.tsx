@@ -57,7 +57,7 @@ function ProductPage() {
   const hasVariants = !!product.variantGroups?.length;
 
   const handleAdd = (goToCart: boolean) => {
-    add(product, { shipping, qty, variants: hasVariants ? selected : undefined, unitPrice });
+    add(product, { shipping, qty, variants: hasVariants ? selected : undefined, });
     toast.success(product.status === "pre-order" ? "Pre-order added to cart" : "Added to cart");
     if (goToCart) navigate({ to: "/cart" });
   };

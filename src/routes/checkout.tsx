@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CheckCircle2, CreditCard, Smartphone, Copy } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/lib/store";
-import { SHIPPING_OPTIONS } from "@/lib/products";
+import { SHIPPING_OPTIONS, variantImagesFor } from "@/lib/products";
 import { ghs } from "@/lib/currency";
 import { SectionHeader } from "./index";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
@@ -20,7 +20,9 @@ function Checkout() {
   const [done, setDone] = useState(false);
 
   const subtotal = items.reduce((s, i) => {
-    const ship = i.shipping ? SHIPPING_OPTIONS.find((o) => o.id === i.shipping)?.cost ?? 0 : 0;
+    const ship =
+  i.product.status === "pre-order"
+    ? SHIPPING_OPTIONS.find((o) => o.id === i.shipping)?.cost ?? 0 : 0;
     return s + (i.unitPrice + ship) * i.qty;
   }, 0);
 
@@ -107,14 +109,14 @@ function Checkout() {
               const variantSummary = it.variants ? Object.values(it.variants).join(" · ") : null;
               return (
                 <div key={it.key} className="flex gap-3 items-center">
-                  <img src={it.product.image} alt={it.product.name} className="h-14 w-14 rounded-xl object-cover" />
+                  <img src={variantImagesFor(it.product, it.variants ?? {})[0]} alt={it.product.name} className="h-14 w-14 rounded-xl object-cover" />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{it.product.name}</p>
                     <p className="text-xs text-muted-foreground truncate">
                       Qty {it.qty}{variantSummary ? ` · ${variantSummary}` : ""}{ship ? ` · ${ship.icon} ${ship.label}` : ""}
                     </p>
                   </div>
-                  <p className="text-sm font-semibold">{ghs((it.unitPrice + (ship?.cost ?? 0)) * it.qty)}</p>
+                  <p className="text-sm font-semibold">{ghs(it.unitPrice * it.qty)}</p>
                 </div>
               );
             })}
@@ -159,7 +161,7 @@ function MomoInstructions({ total }: { total: number }) {
   const orderLines = items.map((it) => {
     const ship = it.shipping ? SHIPPING_OPTIONS.find((o) => o.id === it.shipping) : null;
     const variantSummary = it.variants ? ` [${Object.values(it.variants).join(" · ")}]` : "";
-    return `• ${it.product.name}${variantSummary} × ${it.qty} — ${ghs((it.unitPrice + (ship?.cost ?? 0)) * it.qty)}${ship ? ` (${ship.label})` : ""}`;
+    return `• ${it.product.name}${variantSummary} × ${it.qty} — ${ghs(it.unitPrice * it.qty)}${ship ? ` (${ship.label})` : ""}`;
   }).join("\n");
   const waMsg = `Hello OBOTANMALL, I have made a Mobile Money payment of ${ghs(total)} for the following order:\n\n${orderLines}\n\nTotal: ${ghs(total)}\n\nHere is my transaction reference:`;
   const waHref = `https://wa.me/233203662465?text=${encodeURIComponent(waMsg)}`;

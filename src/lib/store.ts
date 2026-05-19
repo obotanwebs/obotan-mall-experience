@@ -35,7 +35,7 @@ export const useCart = create<CartState>()(
       add: (product, opts) =>
         set((s) => {
           const key = `${product.id}::${variantSig(opts?.variants)}`;
-          const unitPrice = opts?.unitPrice ?? product.price;
+          const unitPrice = product.price;
           const existing = s.items.find((i) => i.key === key);
           if (existing) {
             return { items: s.items.map((i) => i.key === key ? { ...i, qty: i.qty + (opts?.qty ?? 1) } : i) };

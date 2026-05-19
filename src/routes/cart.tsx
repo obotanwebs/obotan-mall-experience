@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/store";
-import { SHIPPING_OPTIONS } from "@/lib/products";
+import { SHIPPING_OPTIONS, variantImagesFor } from "@/lib/products";
 import { ghs } from "@/lib/currency";
 import { SectionHeader } from "./index";
 
@@ -14,8 +14,10 @@ function CartPage() {
   const { items, setQty, remove, setShipping } = useCart();
 
   const subtotal = items.reduce((sum, i) => {
-    const ship = i.shipping ? SHIPPING_OPTIONS.find((o) => o.id === i.shipping)?.cost ?? 0 : 0;
-    return sum + (i.unitPrice + ship) * i.qty;
+    const ship =
+  i.product.status === "pre-order"
+    ? SHIPPING_OPTIONS.find((o) => o.id === i.shipping)?.cost ?? 0 : 0;
+    return sum + (i.product.price + ship) * i.qty;
   }, 0);
 
   if (items.length === 0) {
@@ -38,14 +40,14 @@ function CartPage() {
         <div className="space-y-4">
           {items.map((it) => {
             const ship = it.shipping ? SHIPPING_OPTIONS.find((o) => o.id === it.shipping) : null;
-            const line = (it.unitPrice + (ship?.cost ?? 0)) * it.qty;
+            const line = it.unitPrice * it.qty;
             const variantSummary = it.variants
               ? Object.values(it.variants).join(" · ")
               : null;
             return (
               <div key={it.key} className="glass-strong rounded-3xl p-4 flex flex-wrap sm:flex-nowrap gap-4 items-center">
                 <Link to="/product/$slug" params={{ slug: it.product.slug }} className="block h-20 w-20 sm:h-24 sm:w-24 rounded-2xl overflow-hidden flex-shrink-0">
-                  <img src={it.product.image} alt={it.product.name} className="h-full w-full object-cover" />
+                  <img src={variantImagesFor(it.product, it.variants ?? {})[0]}  alt={it.product.name} className="h-full w-full object-cover"/>
                 </Link>
                 <div className="flex-1 min-w-0 basis-[calc(100%-6rem)] sm:basis-auto">
                   <Link to="/product/$slug" params={{ slug: it.product.slug }} className="font-semibold hover:underline truncate block">{it.product.name}</Link>

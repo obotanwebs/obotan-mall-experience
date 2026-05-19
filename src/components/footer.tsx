@@ -16,9 +16,9 @@ export function Footer() {
             Everything you need, all in one place. A premium digital mall built for what's next.
           </p>
           <div className="mt-4 space-y-1 text-sm text-muted-foreground">
-            <p className="flex items-start gap-1">📍 <span>Ashongman Estate, Last Stop, Greater Accra, Ghana</span></p>
-            <a href="tel:+233203662465" className="block hover:text-foreground transition">📞 0203 662 465</a>
-            <a href="tel:+233553306538" className="block hover:text-foreground transition">📞 0553 306 538</a>
+            <p className="flex items-start font-bold gap-1">📍 <span>Ashongman Estate, Last Stop, Greater Accra, Ghana</span></p>
+            <a href="tel:+233203662465" className="block hover:text-foreground transition font-bold">📞 0203 662 465</a>
+            <a href="tel:+233553306538" className="block hover:text-foreground transition font-bold">📞 0553 306 538</a>
           </div>
           <div className="mt-5 flex gap-2">
             {[Instagram, Twitter, Facebook, Youtube].map((Icon, i) => (
