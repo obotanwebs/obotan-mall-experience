@@ -26,7 +26,7 @@ import squid from "@/assets/squid.jpg";
 import stripe from "@/assets/stripe.jpg";
 import camonier from "@/assets/camonier.jpg";
 import dwalker from "@/assets/dwalker.jpg";
-import slippers from "../assets/slippers.jpg";
+import slippers from "@/assets/slippers2.jpg";
 import slippers1 from "@/assets/slippers1.jpg";
 import shoekhaki from "@/assets/shoe-khaki.jpg";
 import max from "@/assets/max.jpg";
