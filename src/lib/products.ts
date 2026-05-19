@@ -31,8 +31,8 @@ import slippers1 from "@/assets/slippers1.jpg";
 import shoekhaki from "@/assets/shoe-khaki.jpg";
 import max from "@/assets/max.jpg";
 import space from "@/assets/shoe-1.jpg";
-import step from "@/assets/step.jpg";
-import step1 from "@/assets/step1.jpg";
+import Bigstep from "@/assets/Bigstep.jpg";
+import Bigstep1 from "@/assets/Bigstep.jpg";
 import vshoe from "@/assets/vshoe.jpg";
 import exewhite from "@/assets/exewhite.jpg";
 import exeblack from "@/assets/exeblack.jpg";
@@ -638,7 +638,7 @@ variantGroups: [
 
     {
     id: "23", slug: "Big Stepper", name: "Big Stepper",
-    category: "fashion", price: 28, image: step, images: [step1],
+    category: "fashion", price: 28, image: Bigstep, images: [Bigstep1],
   variantGroups: [
     { type: "size", label: "Size", options: ["38","39","40","41","42","43","44","45","46"].map(v => ({ value: v })) },
   ],
