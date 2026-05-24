@@ -45,12 +45,12 @@ import flygreen from "../assets/flygreen.jpg";
 import flypurple from "../assets/flypurple.jpg";
 import flyblue from "../assets/flyblue.jpg";
 import lobothin from "../assets/labo1.jpeg";
-import veins1 from "../assets/veins1.jpg";
-import veins2 from "../assets/veins2.jpg";
-import fort from "../assets/fort.jpg";
-import rider from "../assets/rider.jpg";
-import talkt from "../assets/talkingtom.jpg";
-import whity from "../assets/whity.jpg";
+import veins1 from "../assets/veins.jpg";
+import veins2 from "../assets/veins.webp";
+import fort from "../assets/fort.webp";
+import rider from "../assets/rider.webp";
+import talkt from "../assets/talkingt.webp";
+import whity from "../assets/whity.jpeg";
 import blk from "../assets/blk.jpg";
 import blk2 from "../assets/blk2.jpg";
 
