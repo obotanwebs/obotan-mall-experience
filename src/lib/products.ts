@@ -44,7 +44,7 @@ import flypink from "../assets/flypink.jpg";
 import flygreen from "../assets/flygreen.jpg";
 import flypurple from "../assets/flypurple.jpg";
 import flyblue from "../assets/flyblue.jpg";
-import lobothin from "../assets/lobothin.jpg";
+import lobothin from "../assets/labo1.jpeg";
 import veins1 from "../assets/veins1.jpg";
 import veins2 from "../assets/veins2.jpg";
 import fort from "../assets/fort.jpg";
