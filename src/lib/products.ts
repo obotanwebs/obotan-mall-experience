@@ -59,8 +59,8 @@ import blk2 from "../assets/blk2.jpeg";
 
 import backpack from "../assets/sb-black.jpeg";
 import bagblack from "../assets/Bag-black.jpeg";
-import bagwhite from "../assets/bag-white.jpeg";
-import bagpink from "../assets/bag-pink.jpeg";
+import bagwhite from "../assets/Bag-white.jpeg";
+import bagpink from "../assets/Bag-pink.jpeg";
 import bagbrown from "../assets/db-brown.jpeg";
 import bagcream from "../assets/db-cream.jpeg";
 import bagblue from "../assets/db-blue.jpeg";
