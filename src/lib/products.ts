@@ -47,26 +47,26 @@ import flyblue from "../assets/flyblue.jpg";
 import lobothin from "../assets/labo1.jpeg";
 import veins1 from "../assets/veins.jpg";
 import veins2 from "../assets/veins.webp";
-import fort from "../assets/fort.webp";
+import fort from "../assets/fort.jpeg";
 import rider from "../assets/rider.webp";
 import talkt from "../assets/talkingt.webp";
 import whity from "../assets/whity.jpeg";
-import blk from "../assets/blk.jpg";
-import blk2 from "../assets/blk2.jpg";
+import blk from "../assets/blk.png";
+import blk2 from "../assets/blk2.jpeg";
 
 
 
 
-import backpack from "../assets/sb-black.jpg";
-import bagblack from "../assets/bag-black.jpg";
-import bagwhite from "../assets/bag-white.jpg";
-import bagpink from "../assets/bag-pink.jpg";
-import bagbrown from "../assets/db-brown.jpg";
-import bagcream from "../assets/db-cream.jpg";
-import bagblue from "../assets/db-blue.jpg";
-import bbrown from "../assets/b-brown.jpg";
-import bpink from "../assets/b-pink.jpg";
-import bblack from "../assets/b-black.jpg";
+import backpack from "../assets/sb-black.jpeg";
+import bagblack from "../assets/bag-black.jpeg";
+import bagwhite from "../assets/bag-white.jpeg";
+import bagpink from "../assets/bag-pink.jpeg";
+import bagbrown from "../assets/db-brown.jpeg";
+import bagcream from "../assets/db-cream.jpeg";
+import bagblue from "../assets/db-blue.jpeg";
+import bbrown from "../assets/b-brown.jpeg";
+import bpink from "../assets/b-pink.jpeg";
+import bblack from "../assets/b-black.jpeg";
 
 
 import sunglasses from "../assets/p-sunglasses.jpg";
@@ -83,32 +83,32 @@ import sdblue from "../assets/p-jacket.jpg";
 import sdwhite from "../assets/p-jacket.jpg";
 import sdbrown from "../assets/p-jacket.jpg";
 
-import suitred from "../assets/suit-red.jpg";
-import suitblack from "../assets/suit-black.jpg";
-import suitblue from "../assets/suit-blue.jpg";
-import suitgreen from "../assets/suit-green.jpg";
-import hoodywhite from "../assets/hoody-white.jpg";
-import hoodyorange from "../assets/hoody-orange.jpg";
-import hoodywine from "../assets/hoody-wine.jpg";
-import hoodygreen from "../assets/hoody-green.jpg";
+import suitred from "../assets/suit-red.jpeg";
+import suitblack from "../assets/suit-black.jpeg";
+import suitblue from "../assets/suit-blue.jpeg";
+import suitgreen from "../assets/suit-green.jpeg";
+import hoodywhite from "../assets/hoody-white.jpeg";
+import hoodyorange from "../assets/hoody-orange.jpeg";
+import hoodywine from "../assets/hoody-wine.jpeg";
+import hoodygreen from "../assets/hoody-green.jpeg";
 
-import Ldorange from "../assets/LD-orange.jpg";
-import Ldblue from "../assets/LD-blue.jpg";
-import dress from "../assets/dress.jpg";
-import dresss from "../assets/dresss.jpg";
-import dresswhite from "../assets/dress-white.jpg";
-import bdressblue from "../assets/dress-blue.jpg";
-import bdressbrown from "../assets/dress-brown.jpg";
-import straightdress from "../assets/straight-dress.jpg";
-import ladydress from "../assets/ladydress.jpg";
+import Ldorange from "../assets/LD-orange.jpeg";
+import Ldblue from "../assets/LD-blue.jpeg";
+import dress from "../assets/dress.jpeg";
+import dresss from "../assets/dresss.jpeg";
+import dresswhite from "../assets/dress-white.jpeg";
+import bdressblue from "../assets/dress-blue.jpeg";
+import bdressbrown from "../assets/dress-brown.jpeg";
+import straightdress from "../assets/straight-dress.jpeg";
+import ladydress from "../assets/ladydress.jpeg";
 import under from "../assets/under.jpg";
 
 
 import jacket from "../assets/p-jacket.jpg";
-import jeanz from "../assets/jeanz.jpg";
-import pinky from "../assets/pinky.jpg";
-import tunder from "../assets/tunder.jpg";
-import joggers from "../assets/joggers.jpg";
+import jeanz from "../assets/jeanz.jpeg";
+import pinky from "../assets/pinky.jpeg";
+import tunder from "../assets/tunder.jpeg";
+import joggers from "../assets/joggers.jpeg";
 import jogz from "../assets/jogz.jpg";
 import jogblack from "../assets/jog-black.jpg";
 import joggreen from "../assets/jog-green.jpg";
@@ -129,7 +129,7 @@ import coffeemaker from "../assets/p-coffeemaker.jpg";
 import pillow from "../assets/p-pillow.jpg";
 import beltwatch from "../assets/p-belt.jpg";
 
-import iphone from "../assets/p-iphone.jpg";
+import iphone from "../assets/i171.jpg";
 import iphone15 from "../assets/15.jpg";
 import iphone13 from "../assets/13pro.jpg";
 import iphone16 from "../assets/16.webp";
@@ -139,11 +139,11 @@ import macbook from "../assets/p-macbook.jpg";
 import dell from "../assets/p-dell.jpg";
 import airfryer from "../assets/p-airfryer.jpg";
 
-import gcwhite from "../assets/gc-white.jpg";
-import gcred from "../assets/gc-red.jpg";
-import gcblack from "../assets/gc-black.jpg";
-import gcblue from "../assets/gc-blue.jpg";
-import gcpink from "../assets/gc-pink.jpg";
+import gcwhite from "../assets/gc-white.jpeg";
+import gcred from "../assets/gc-red.jpeg";
+import gcblack from "../assets/gc-black.jpeg";
+import gcblue from "../assets/gc-blue.jpeg";
+import gcpink from "../assets/gc-pink.jpeg";
 
 import washer from "../assets/p-washer.jpg";
 import portfan from "../assets/p-fan.jpg";
@@ -1168,10 +1168,10 @@ variantGroups: [
 
    {
     id: "68", slug: "LQ Veins", name: "LQ Veins",
-    category: "fashion", price: 8.3, image: veins2, images: [veins2],
+    category: "fashion", price: 8.3, image: veins1, images: [veins1],
         colorImages: {
-    Red: [veins2],
-    Green: [veins1],
+    Orange: [veins1],
+    Green: [veins2],
     
   },
   variantGroups: [
@@ -1179,7 +1179,7 @@ variantGroups: [
       type: "color",
       label: "Color",
       options: [
-        { value: "Red", swatch: "#ff0000" },
+        { value: "Orange", swatch: "#ff3c00" },
         { value: "Green", swatch: "#0b7901" },
         
       ],
